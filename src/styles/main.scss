@@ -1,0 +1,27 @@
+:root {
+  color: #f7f7fb;
+  background: #101827;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+
+.hero {
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  padding: 2rem;
+  text-align: center;
+
+  h1 { font-size: clamp(3rem, 10vw, 6rem); margin: 0; }
+  p { color: #cbd5e1; font-size: 1.1rem; }
+}
+
+.hero__eyebrow {
+  color: #60a5fa;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}

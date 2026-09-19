@@ -1,0 +1,19 @@
+services:
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: az-portfolio-react
+
+    ports:
+      - "5173:5173"
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+    command: npm run dev -- --host 0.0.0.0

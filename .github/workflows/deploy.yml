@@ -5,15 +5,22 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: production
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -25,5 +32,18 @@ jobs:
       - name: Build React application
         run: npm run build
 
-      - name: Deploy to Linode
-        run: ...
+      - name: Configure SSH
+        run: |
+          install -m 700 -d ~/.ssh
+
+          printf '%s\n' "${{ secrets.LINODE_SSH_KEY }}" > ~/.ssh/id_ed25519
+
+          chmod 600 ~/.ssh/id_ed25519
+
+          ssh-keyscan -H "${{ secrets.LINODE_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy production files
+        run: |
+          rsync -az --delete \
+            ./dist/ \
+            "${{ secrets.LINODE_USER }}@${{ secrets.LINODE_HOST }}:/var/www/html/portfolio.adrian-zalewski.com/public_html/"

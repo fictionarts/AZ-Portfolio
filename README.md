@@ -6,7 +6,7 @@ The portfolio demonstrates experience spanning traditional server-side developme
 
 ## Overview
 
-AZ Portfolio is a React application built with **Vite** and designed to showcase Adrian Zalewski's professional development experience, technical projects, and ability to work across different technology stacks.
+AZ Portfolio is a React application built with **Vite** and designed to showcase Adrian Zalewski's professional development experience, technical projects, ability to work across different technology stacks, and more.
 
 The project also serves as a practical demonstration of a modern development and deployment workflow:
 
